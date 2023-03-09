@@ -25,4 +25,8 @@ public class User {
     @JoinColumn(name = "userId")
     private Set<Todo> todos;
 
+    @JsonIgnore
+    @Column(nullable = false)
+    private String apiKey;
+
 }
