@@ -13,6 +13,8 @@ import java.util.Optional;
 public class TodoController {
     @Autowired
     private TodoRepository todoRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping("/todo")
     public ResponseEntity<Todo> get(@RequestParam(value = "id")Integer id) {
@@ -23,15 +25,6 @@ public class TodoController {
 
         return todoFromDb.map(todo -> new ResponseEntity<>(todo, HttpStatus.OK)).orElseGet(() -> new ResponseEntity("ID "+id+" NOT FOUND", HttpStatus.NOT_FOUND));
     }
-
-    @GetMapping("/todo/all")
-    public ResponseEntity<Iterable<Todo>> getAll() {
-        //get all todos from the database
-        Iterable<Todo> all = todoRepository.findAll();
-
-        return new ResponseEntity<Iterable<Todo>>(all, HttpStatus.OK);
-    }
-
 
     @PostMapping("/todo")
     public ResponseEntity<Todo> createTodo(@RequestBody Todo newTodo) {
@@ -63,6 +56,16 @@ public class TodoController {
             return new ResponseEntity("UPDATE SUCCESSFUL",HttpStatus.OK);
         }
         return new ResponseEntity("TODO NOT FOUND",HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/todo/all")
+    public ResponseEntity<Iterable<Todo>> getAllByUserId(@RequestHeader("apiKey") String apiKey) {
+        //get all todos with user apiKey from the database
+        System.out.println(apiKey);
+        var user = userRepository.findByApiKey(apiKey);
+        Iterable<Todo> all = todoRepository.findAllByUserId(user.get().getId());
+
+        return new ResponseEntity<Iterable<Todo>>(all, HttpStatus.OK);
     }
 
     @PatchMapping("/todo/changeStatus")
