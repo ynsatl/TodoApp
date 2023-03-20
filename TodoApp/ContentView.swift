@@ -17,7 +17,7 @@ struct ContentView: View {
             Spacer()
             TextField("Name",
                       text: $name,
-                      prompt: Text("Name").foregroundColor(.blue))
+                      prompt: Text("Name").foregroundColor(.blue)) //hallo
             .padding(10)
             .overlay {
                 RoundedRectangle(cornerRadius: 10)
