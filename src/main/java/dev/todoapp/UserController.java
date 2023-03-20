@@ -15,20 +15,20 @@ public class UserController {
     private UserRepository userRepository;
 
     @PostMapping("/register")
-    private ResponseEntity<User> registerUser(@RequestBody User user) {
+    private ResponseEntity<Users> registerUser(@RequestBody Users user) {
         //generate an apiKey
         user.setApiKey(UUID.randomUUID().toString());
         userRepository.save(user);
-        return new ResponseEntity<User>(user, HttpStatus.CREATED);
+        return new ResponseEntity<Users>(user, HttpStatus.CREATED);
     }
 
     @GetMapping("/users")
-    private Iterable<User> getAllUsers() {
+    private Iterable<Users> getAllUsers() {
         return userRepository.findAll();
     }
 
     @GetMapping("/users/{id}")
-    private User getUserById(@PathVariable Integer id) {
+    private Users getUserById(@PathVariable Integer id) {
         return userRepository.findById(id).get();
     }
     @DeleteMapping("/users/{id}")
@@ -42,7 +42,7 @@ public class UserController {
         if the user is found, return the apiKey
         if the user is not found, return an error*/
 
-        Optional<User> user = userRepository.findByEmailAndPassword(email,password);
+        Optional<Users> user = userRepository.findByEmailAndPassword(email,password);
         if (user.isPresent()) {
             return new ResponseEntity<String>(user.get().getApiKey(), HttpStatus.OK);
         }
