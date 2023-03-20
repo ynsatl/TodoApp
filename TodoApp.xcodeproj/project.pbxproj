@@ -74,9 +74,7 @@
 		F137A03029C7D9D5009AFE53 = {
 			isa = PBXGroup;
 			children = (
-				F137A03B29C7D9D5009AFE53 /* TodoApp */,
-				F137A04C29C7D9D6009AFE53 /* TodoAppTests */,
-				F137A05629C7D9D6009AFE53 /* TodoAppUITests */,
+				F137A06829C7DC85009AFE53 /* Frontend */,
 				F137A03A29C7D9D5009AFE53 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -125,6 +123,16 @@
 				F137A05929C7D9D6009AFE53 /* TodoAppUITestsLaunchTests.swift */,
 			);
 			path = TodoAppUITests;
+			sourceTree = "<group>";
+		};
+		F137A06829C7DC85009AFE53 /* Frontend */ = {
+			isa = PBXGroup;
+			children = (
+				F137A05629C7D9D6009AFE53 /* TodoAppUITests */,
+				F137A04C29C7D9D6009AFE53 /* TodoAppTests */,
+				F137A03B29C7D9D5009AFE53 /* TodoApp */,
+			);
+			name = Frontend;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
